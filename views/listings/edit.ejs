@@ -1,0 +1,65 @@
+<% layout('layout/boilerplate') %>
+
+    <body>
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h3>Edit Your listing</h3>
+                <form method="post" action="/listings/<%= data._id %>?_method=PUT" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" name="listings[title]" value="<%= data.title %>" id="title"
+                            class="form-control" required>
+                        <div class="valid-feedback">Title Looks good!</div>
+                        <div class="invalid-feedback">Title is required</div>
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="listings[description]" id="description"
+                            class="form-control"><%= data.description %></textarea>
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                        <label for="img-link" class="form-label">image URL</label>
+                        <input type="text" name="listings[img]" value="<%= data.img %>" id="img-link"
+                            class="form-control" required>
+                        <div class="valid-feedback">Image Looks good!</div>
+                        <div class="invalid-feedback">Need to insert a image</div>
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Address</label>
+                        <input type="text" name="listings[location]" value="<%= data.location %>" id="location"
+                            class="form-control" required>
+                        <div class="valid-feedback">locarion is ok!</div>
+                        <div class="invalid-feedback">locality of property is required</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="mb-3 col-md-5">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" name="listings[price]" value="<%= data.price %>" id="price"
+                                class="form-control" required>
+                            <div class="valid-feedback">Price Looks good!</div>
+                            <div class="invalid-feedback">Price should be valid</div>
+                        </div>
+                        <div class="mb-3 col-md-7">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" name="listings[country]" value="<%= data.country %>" id="country"
+                                class="form-control" required>
+                            <div class="valid-feedback">country is ok!</div>
+                            <div class="invalid-feedback">Country is required</div>
+                        </div>
+                    </div>
+                    <br>
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <button type="submit" class="btn btn-dark">Edit</button>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </body>
+
+    </html>
