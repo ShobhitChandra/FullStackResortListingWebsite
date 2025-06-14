@@ -2,6 +2,7 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const Listing = require("./models/listing");
 const review = require("./models/review.js");
 const {listingSchema, reviewSchema} = require("./Schema.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {

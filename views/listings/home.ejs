@@ -1,12 +1,141 @@
 <% layout('layout/boilerplate') %>
+    <style>
+        #filters {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            gap: 1rem;
+        }
+
+        .filter {
+            text-align: center;
+            margin-right: 2rem;
+            margin-top: 1rem;
+            opacity: 0.7;
+        }
+
+        .filter-link {
+            text-decoration: none;
+            color: black;
+        }
+
+        .filter:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .displaytool {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-left: auto;
+            font-style: italic;
+            border: 1px solid #353535;
+            border-radius: 1rem;
+            width: fit-content;
+            padding: 0.5rem;
+            background-color: #f1f3f5;
+        }
+
+        .tax {
+            opacity: 0;
+        }
+    </style>
+
     <body>
-        <h3>ALL LISTINGS</h3>
-        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+        <div id="filters">
+            <a href="/listings/category/trending" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p><small>Trending</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/hotel" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-bed"></i></div>
+                    <p><small>Hotel</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/iconic" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-ruler"></i></div>
+                    <p><small>Iconic Cities</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/mountains" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain-city"></i></div>
+                    <p><small>Mountains</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/beach" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                    <p><small>Beach</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/castel" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-brands fa-fort-awesome-alt"></i></div>
+                    <p><small>Castle</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/pools" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-person-swimming"></i></div>
+                    <p><small>Amazing Pools</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/forest" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-tree"></i></div>
+                    <p><small>Forest</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/camping" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-campground"></i></div>
+                    <p><small>Camping</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/snow" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-snowflake"></i></div>
+                    <p><small>Snow Destinations</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/historical" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-building-columns"></i></div>
+                    <p><small>Historical Sites</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/lake" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-water"></i></div>
+                    <p><small>Lake View</small></p>
+                </div>
+            </a>
+            <a href="/listings/category/fireplace" class="filter-link">
+                <div class="filter">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p><small>Fireplace Cabins</small></p>
+                </div>
+            </a>
+        </div>
+        <div style="display: flex;">
+            <div class="form-check form-switch form-check-reverse displaytool">
+                <input class="form-check-input" type="checkbox" id="switchCheckReverse">
+                <label class="form-check-label" for="switchCheckReverse">Display Total After Taxes</label>
+            </div>
+        </div>
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-2">
             <% for(let list of data) { %>
                 <a href="/listings/<%= list._id %>" class="Listing-link">
                     <div class="card col">
-                        <img src="<%= list.img %>" class="card-img-top" alt="..." style="height: 20rem;">
-                        <div class="card-img-overlay"> 
+                        <img src="<%= list.img.url %>" class="card-img-top" alt="..." style="height: 20rem;">
+                        <div class="card-img-overlay">
                             More info
                         </div>
                         <div class="card-body">
@@ -16,8 +145,9 @@
                                 </b>
                                 <br>
                                 ₹<%= Number(list.price).toLocaleString("en-IN") %>/ night
-                                <br>
-                                <%= list.country %>
+                                    <i class="tax">+ 18% GST</i>
+                                    <br>
+                                    <%= list.country %>
                             </p>
                         </div>
                     </div>
@@ -27,3 +157,19 @@
     </body>
 
     </html>
+
+    <script>
+        let priceToggel = document.getElementById("switchCheckReverse");
+        priceToggel.addEventListener("click", () => {
+            let taxElements = document.getElementsByClassName("tax");
+            let bgcol = document.querySelector(".displaytool"); // only one box
+
+            for (let info of taxElements) {
+                if (info.style.opacity === "1") {
+                    info.style.opacity = "0";
+                } else {
+                    info.style.opacity = "1";
+                }
+            }
+        });
+    </script>

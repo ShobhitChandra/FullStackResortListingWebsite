@@ -88,7 +88,7 @@ body {
 }
 
 .card-img-overlay {
-   opacity: 0;
+    opacity: 0;
 }
 
 .card-img-overlay:hover {
@@ -110,4 +110,9 @@ body {
     opacity: 0.8;
     margin-bottom: 15px !important;
     border-radius: 8px !important;
+}
+
+#map {
+    height: 300px;
+    width: 100%;
 }

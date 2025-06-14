@@ -12,9 +12,8 @@ const listSchema = new mongoose.Schema({
         type: String,
     },
     img: {
-        type: String,
-        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0EaBVRRURoogcnVPiyPIDE_mgzJERgX9Ccg&s",
-        set: (v) => v === "" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0EaBVRRURoogcnVPiyPIDE_mgzJERgX9Ccg&s" : v,
+        url: String,
+        filename: String,
     },
     price: {
         type: Number,
@@ -36,7 +35,23 @@ const listSchema = new mongoose.Schema({
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true,
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+        }
+    },
+    category: [{
+        type: String,
+        enum: ["Trending", "Hotel", "iconic cities", "Mountains", "Beach", "Castel", "Amazing Pools", "Forest", "Camping", "Snow Destinations", "Historical Sites", "Lake View", "Fireplace Cabins"],
+        required: true,
+    }]
 });
 
 listSchema.post("findOneAndDelete", async (listing) => {

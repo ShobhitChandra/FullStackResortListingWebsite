@@ -6,7 +6,8 @@
             <form method="post" action="/listings" class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" name="listings[title]" placeholder="add title" id="title" class="form-control" required>
+                    <input type="text" name="listings[title]" placeholder="add title" id="title" class="form-control"
+                        required>
                     <div class="valid-feedback">Title Looks good!</div>
                     <div class="invalid-feedback">Title is required</div>
                 </div>
@@ -18,14 +19,8 @@
                 </div>
                 <br>
                 <div class="mb-3">
-                    <label for="img-link" class="form-label">image URL</label>
-                    <input type="text" name="listings[img]" placeholder="Paste url link of your propety" id="img-link"
-                        class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="img-link" class="form-label">image URL</label>
-                    <input type="file" name="listings[img]" id="img-link"
-                        class="form-control">
+                    <label for="img-link" class="form-label">Upload image</label>
+                    <input type="file" name="listings[img]" id="img-link" class="form-control">
                 </div>
                 <br>
                 <div class="mb-3">
@@ -52,7 +47,116 @@
                         <div class="invalid-feedback">Country is required</div>
                     </div>
                 </div>
-                <br>
+                <div class="mb-3">
+                    <label class="form-label d-block">Select Categories</label>
+                    <div class="d-flex flex-wrap gap-2">
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Trending" id="cat1">
+                            </div>
+                            <label class="form-control" for="cat1" style="width: auto;">Trending</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Hotel" id="cat2">
+                            </div>
+                            <label class="form-control" for="cat2" style="width: auto;">Hotel</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="iconic cities" id="cat3">
+                            </div>
+                            <label class="form-control" for="cat3" style="width: auto;">Iconic Cities</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Mountains" id="cat4">
+                            </div>
+                            <label class="form-control" for="cat4" style="width: auto;">Mountains</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Beach" id="cat5">
+                            </div>
+                            <label class="form-control" for="cat5" style="width: auto;">Beach</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Castel" id="cat6">
+                            </div>
+                            <label class="form-control" for="cat6" style="width: auto;">Castel</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Amazing Pools" id="cat7">
+                            </div>
+                            <label class="form-control" for="cat7" style="width: auto;">Amazing Pools</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Forest" id="cat8">
+                            </div>
+                            <label class="form-control" for="cat8" style="width: auto;">Forest</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Camping" id="cat9">
+                            </div>
+                            <label class="form-control" for="cat9" style="width: auto;">Camping</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Snow Destinations" id="cat10">
+                            </div>
+                            <label class="form-control" for="cat10" style="width: auto;">Snow Destinations</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Historical Sites" id="cat11">
+                            </div>
+                            <label class="form-control" for="cat11" style="width: auto;">Historical Sites</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Lake View" id="cat12">
+                            </div>
+                            <label class="form-control" for="cat12" style="width: auto;">Lake View</label>
+                        </div>
+
+                        <div class="input-group" style="width: auto;">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="listings[category]"
+                                    value="Fireplace Cabins" id="cat13">
+                            </div>
+                            <label class="form-control" for="cat13" style="width: auto;">Fireplace Cabins</label>
+                        </div>
+
+                    </div>
+                </div>
                 <div style="display: flex; justify-content: space-evenly;">
                     <button type="submit" class="btn btn-dark btn-add">ADD</button>
                     <button type="reset" class="btn btn-primary">Reset</button>

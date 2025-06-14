@@ -1,5 +1,7 @@
 <% layout('layout/boilerplate') %>
-
+<script>
+    const listing = <%- JSON.stringify(curlisting) %>;
+</script>
     <body>
         <div class="row mt-3 mb-3">
             <div class="col-8 offset-2 text-center">
@@ -7,7 +9,7 @@
                     <%= curlisting.title %> :
                 </h3>
                 <div class="card mb-3 col-7 offset-3 mb-3">
-                    <img src="<%= curlisting.img %>" class="card-img-top show-img" alt="...">
+                    <img src="<%= curlisting.img.url %>" class="card-img-top show-img" alt="...">
                     <div class="card-body">
                         <p class="card-text text-center">
                             <%= curlisting.description %>
@@ -37,8 +39,8 @@
                                 class="needs-validated">
                                 <fieldset class="starability-heart">
                                     <legend>Rating:</legend>
-                                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0"
-                                        checked aria-label="No rating." />
+                                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]"
+                                        value="0" checked aria-label="No rating." />
                                     <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                                     <label for="first-rate1" title="Terrible">1 star</label>
                                     <input type="radio" id="first-rate2" name="review[rating]" value="2" />
@@ -58,7 +60,6 @@
                                 </div>
                                 <button class="btn btn-danger mt-3">Submit</button>
                             </form>
-                            <hr>
                             <% } %>
 
                                 <% if(curlisting.reviews.length) {%>
@@ -92,5 +93,26 @@
                                     <% } %>
                     </div>
         </div>
+        <div class="col-8 offset-2 mb-3 mt-3">
+            <h3>Where you'll be</h3>
+            <div id="map"></div>
+        </div>
         </div>
     </body>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+    <script>
+        let mapToken = "<%= process.env.MAP_TOKEN %>";
+        mapboxgl.accessToken = mapToken;
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11', 
+            center: listing.geometry.coordinates,
+            zoom: 10
+        });
+        const marker1 = new mapboxgl.Marker()
+            .setLngLat(listing.geometry.coordinates)
+            .setPopup(new mapboxgl.Popup({ offset: 25 })
+                .setHTML(`<h5>${listing.location}</h5><p>The exact loction of the destination.</p>`))
+            .addTo(map);
+
+    </script>

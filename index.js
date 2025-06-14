@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV != "PRODUCTION"){
+    require('dotenv').config();
+}
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -73,16 +77,17 @@ app.use("/listings/:id/review", reeviewss);
 app.use("/", ussser);
 
 
-app.get("/", (req, res) => {
-    res.send("root is working properly");
-});
+// app.get("/", (req, res) => {
+//     res.send("root is working properly");
+// });
 
 app.all(/.*/, (req, res, next) => {
-    next(new ExpressError(404, "Page Not Found"));
+    next(new ExpressError("Page Not Found", 404));
 });
 
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong" } = err;
+    console.log(err);
     // res.status(statusCode).send(message)
     res.status(statusCode).render("listings/error", { err, statusCode })
 });

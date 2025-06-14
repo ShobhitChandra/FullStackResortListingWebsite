@@ -2,13 +2,19 @@ const Joi = require('joi');
 
 module.exports.listingSchema = Joi.object({
     listings: Joi.object({
-        owner: Joi.string().required(),
         title: Joi.string().required(),
         description: Joi.string().required(),
         location: Joi.string().required(),
         country: Joi.string().required(),
         price: Joi.number().required().min(1),
-        img: Joi.string().allow("", null)
+        img: Joi.string().allow("", null),
+        category: Joi.array().items(
+            Joi.string().valid(
+                "Trending", "Hotel", "iconic cities", "Mountains", "Beach", "Castel",
+                "Amazing Pools", "Forest", "Camping", "Snow Destinations",
+                "Historical Sites", "Lake View", "Fireplace Cabins"
+            )
+        ).optional()
     }).required()
 });
 
