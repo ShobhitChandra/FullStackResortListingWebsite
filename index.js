@@ -10,19 +10,35 @@ const path = require("path");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/users.js");
 
-
 const listiings = require("./routes/listing.js");
 const reeviewss = require("./routes/review.js");
 const ussser = require("./routes/user.js");
+const { error } = require('console');
+
+const dbURL = process.env.ATLASDB_URL;
+
+const store = MongoStore.create({ 
+    mongoUrl: dbURL,
+    crypto: {
+        secret: process.env.SECRET, 
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+    console.log("Error in MONGO session store", error)
+});
 
 // sessions use
 const sessionOption = {
-    secret: "RandomSecret",
+    store: store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -62,13 +78,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.engine('ejs', ejsMate);
 
-
 main().then(() => {
     console.log("Working");
 }).catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/resorts');
+    await mongoose.connect(dbURL);
 }
 
 

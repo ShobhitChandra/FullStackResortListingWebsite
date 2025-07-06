@@ -4,9 +4,14 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
-module.exports.showall = async (req, res) => {
-    const data = await Listing.find({});
-    res.render("listings/home", { data });
+module.exports.showall = async (req, res, next) => {
+    try {
+        const data = await Listing.find({});
+        res.render("listings/home", { data });
+    } catch (e) {
+        console.log("Error in showall:", e.message);
+        next(e);
+    }
 };
 
 module.exports.showCategory = async (req, res) => {
